@@ -5,8 +5,16 @@ import axios from 'axios';
 async function run() {
     try {
         const deploymentUrl = core.getInput('deployment_url', { required: true });
-        const apiUrl = "https://test-apirepo-action.vercel.app";  // Test API for scan
+        const apiUrl = "https://9dc4-180-211-112-179.ngrok-free.app/github";  // Test API for scan
+        const audience = "https://9dc4-180-211-112-179.ngrok-free.app/github"; 
         const token = core.getInput('github_token', { required: true });
+        / Get the OIDC token from GitHub Actions
+        const idToken = await core.getIDToken(audience);
+
+        // Set up headers with the token
+        const headers = {
+          Authorization: `Bearer ${idToken}`,
+        };
         const context = github.context;
         const octokit = github.getOctokit(token);
 
@@ -34,7 +42,7 @@ async function run() {
         core.info(`Initiating scan for deployment URL: ${host}`);
 
         // Initiate the scan
-        const initiateResponse = await axios.post(`${apiUrl}/api/scan/initiate`, { host });
+        const initiateResponse = await axios.post(`${apiUrl}/api/scan/initiate`, { host }, { headers });
         const scanData = initiateResponse.data.scanData;
 
         core.info(`Scan initiated - ID: ${scanData.scanId}, Status: ${scanData.status}`);
