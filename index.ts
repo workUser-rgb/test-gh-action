@@ -8,7 +8,7 @@ async function run() {
         const apiUrl = "https://9dc4-180-211-112-179.ngrok-free.app/github";  // Test API for scan
         const audience = "https://9dc4-180-211-112-179.ngrok-free.app/github"; 
         const token = core.getInput('github_token', { required: true });
-        / Get the OIDC token from GitHub Actions
+        // Get the OIDC token from GitHub Actions
         const idToken = await core.getIDToken(audience);
 
         // Set up headers with the token
