@@ -31553,8 +31553,8 @@ const axios_1 = __importDefault(__nccwpck_require__(1544));
 async function run() {
     try {
         const deploymentUrl = core.getInput('deployment_url', { required: true });
-        const apiUrl = "https://9dc4-180-211-112-179.ngrok-free.app/github"; // Test API for scan
-        const audience = "https://9dc4-180-211-112-179.ngrok-free.app/github";
+        const apiUrl = "https://9dc4-180-211-112-179.ngrok-free.app"; // Test API for scan
+        const audience = "https://9dc4-180-211-112-179.ngrok-free.app";
         const token = core.getInput('github_token', { required: true });
         // Get the OIDC token from GitHub Actions
         const idToken = await core.getIDToken(audience);
